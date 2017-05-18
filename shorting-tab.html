@@ -1,0 +1,63 @@
+<!doctype html>
+<html ng-app="mainApp">
+<head>
+<meta charset="utf-8">
+<title>Test Demo</title>
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+
+ <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+<script type="text/javascript" src="json/json-data.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> 
+
+</head>
+<script type="text/javascript">
+$(function(){
+    $(".tabList li").click(function(){
+        $(this).addClass("ShortingTabActive").siblings().removeClass("ShortingTabActive");
+    })
+})
+
+</script>
+<body>
+<!--===Tab Section===-->	
+<div class="main_conatiner">
+    <div class="searchDataSec">
+        <form>
+            <input type="text" name="name" placeholder="Search..." ng-model="studentName"/>
+            <input type="submit" value="" />
+        </form>
+    </div>
+     <div class="mainTabContainer" ng-controller="tabSortController">
+        <ul class="tabList">
+            <li class="ShortingTabActive">
+                <a href="javascript:void(0)" ng-click="sortData('heading')">All</a>
+            </li> 
+            <li>
+                <a href="javascript:void(0)" ng-click="sortData('description')">News</a>
+            </li> 
+             <li>
+                <a href="javascript:void(0)" ng-click="sortData('image')">Photos</a>
+            </li> 
+             <li>
+                <a href="javascript:void(0)" ng-click="sortData('image')">Videos</a>
+            </li>          
+        </ul>
+        <div class="tabContainet">
+            <div class="tabData"">
+                <ul>
+                    <li ng-repeat="repatlist in optsList | orderBy:sortColumn:reverseSort">
+                        <a href="#"><img ng-src="{{repatlist.image}}"></a>
+                        <h1>{{repatlist.heading}}</h1>
+                        <p>{{repatlist.description}}</p>
+                       
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

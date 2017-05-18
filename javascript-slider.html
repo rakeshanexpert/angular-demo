@@ -1,0 +1,87 @@
+<!doctype html>
+<html ng-app="mainApp">
+<head>
+<meta charset="utf-8">
+<title>Test Demo</title>
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+<script type="text/javascript" src="json/json-data.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> 
+
+</head>
+
+<body>
+	
+<div class="main_conatiner">
+   <div class="sliderConatiner">
+        <ul id="slider" >
+            <li><img src="images/item-1.png"></li>
+            <li><img src="images/item-2.png"></li>
+            <li><img src="images/item-3.png"></li>
+        </ul>
+        <span id="prev">&laquo;</span>
+        <span id="next">&raquo;</span>
+   </div>
+</div>
+<script type="text/javascript">
+    var sliderConatiner = document.querySelector("#slider");
+    var slides = document.querySelectorAll("li");
+    var slidetLength = slides.length;
+    var slidesWidth = slides[0].clientWidth;
+    var totalSlidesWidth = slidetLength * slidesWidth;
+    sliderConatiner.style.marginLeft.width  = slidetLength*slidesWidth;
+    
+    //console.log(totalSlidesWidth);
+    document.getElementById("slider").style.width = totalSlidesWidth+"px";
+
+//next click buttion
+    function clickNext(){
+        var currentIndex = getCurrentIndex();
+        var targetIndex;
+        if (-(currentIndex-1) >= slidetLength) {
+            targetIndex = 0;
+        }else{
+            targetIndex = slidesWidth*(currentIndex-1)+'px';
+             //console.log(targetIndex);
+        }
+        sliderConatiner.style.marginLeft = targetIndex;
+    }
+
+//Previous click button
+    function slidePrev(){
+        var currentIndex = getCurrentIndex();
+        var targetIndex;
+        if (currentIndex == 0) {
+            targetIndex = -slidesWidth*(slidetLength-1)+'px';
+            //console.log(targetIndex);
+        } else {
+            targetIndex = slidesWidth * (currentIndex + 1) + "px";
+            //console.log(targetIndex);
+        }
+
+        sliderConatiner.style.marginLeft = targetIndex;
+    }
+
+
+
+ 
+//Global function 
+ function getCurrentIndex(){
+    var currentIndex;
+    if(sliderConatiner.style.marginLeft){
+        currentIndex = parseInt(sliderConatiner.style.marginLeft) / slidesWidth;
+    }else{
+        currentIndex = 0;
+    }
+    return currentIndex;
+}
+
+//on click event binding
+document.querySelector("#prev").onclick = slidePrev;
+document.querySelector("#next").onclick = clickNext;
+
+</script>
+</body>
+</html>
