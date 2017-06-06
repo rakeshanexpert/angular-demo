@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Form A</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	
+</head>
+<body>
+	<div class="formMainContainer">
+		<div class="logintxt">
+			<h1><span class="login_user"><i class="material-icons dp48">supervisor_account</i></span>Login Details</h1>
+		</div>
+	    <form id="formValidateLogin" method="get" action="" novalidate="novalidate">
+	    	<div class="loginContainer">
+		        <div class="input-field col-sm-12 col-md-12 col-lg-12">
+		          <span class="emailIcon"><i class="material-icons dp48">email</i></span>
+		        	<input type="email" name="email" required aria-invalid="false" class="validate error">
+				    <label for="email" class="">Email</label>
+					
+		        </div>
+		        <div class="input-field col-sm-12 col-md-12 col-lg-12">
+		          <span class="emailIcon"><i class="material-icons dp48">lock_outline</i></span>
+		           <input id="password" type="password" data-error=".errorTxt1" aria-required="true" class="validate error" aria-describedby="uname-error" aria-invalid="true"  required>
+        		  <label for="password" class="">Password</label>
+        		  <div class="errorTxt1"></div>
+		        </div>
+		        <div class="submitLoginBtn">
+		        	<button class="btn waves-effect waves-light" type="submit" name="action">Submit <i class="material-icons right">send</i></button>
+		        </div>
+	        </div>
+	    </form>
+    </div>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+	<script src="js/jquery.validate.js"></script>
+    <script type="text/javascript">
+	$(document).ready(function() {
+		    Materialize.updateTextFields();
+		
+		$("#formValidateLogin").validate({
+			rules: {
+				firstname: "required",
+				lastname: "required",
+				username: {
+					required: true,
+					minlength: 2
+				},
+				password: {
+					required: true,
+					minlength: 5
+				},
+				confirm_password: {
+					required: true,
+					minlength: 5,
+					equalTo: "#password"
+				},
+				email: {
+					required: true,
+					email: true
+				},
+				topic: {
+					required: "#newsletter:checked",
+					minlength: 2
+				},
+				agree: "required"
+			},
+			messages: {
+				firstname: "Please enter your firstname",
+				lastname: "Please enter your lastname",
+				username: {
+					required: "Please enter a username",
+					minlength: "Your username must consist of at least 2 characters"
+				},
+				password: {
+					required: "Please provide a password",
+					minlength: "Your password must be at least 5 characters long"
+				},
+				confirm_password: {
+					required: "Please provide a password",
+					minlength: "Your password must be at least 5 characters long",
+					equalTo: "Please enter the same password as above"
+				},
+				//email: "Please enter a valid email address",
+				agree: "Please accept our policy",
+				topic: "Please select at least 2 topics"
+			},
+			 errorElement : 'div',
+        errorPlacement: function(error, element) {
+          var placement = $(element).data('error');
+          if (placement) {
+            $(placement).append(error)
+          } else {
+            error.insertAfter(element);
+          }
+        }
+		});
+
+		 });
+	</script> 
+</body>
+</html>
